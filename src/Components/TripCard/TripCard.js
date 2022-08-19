@@ -1,6 +1,6 @@
 import './TripCard.css'
 
-const TripCards = ({date, duration, status, location, image, alt}) => {
+const TripCards = ({date, duration, status, location, image, alt, id,  cancelTrip}) => {
   return (
     <article className='trip-card zoom'>
       <div>
@@ -8,6 +8,7 @@ const TripCards = ({date, duration, status, location, image, alt}) => {
         <p><b>Location: {location}</b></p>
         <p><b>Date of Your Trip: </b> {date}</p>
         <p><b>Duration of Your Stay: </b> {duration} days</p>
+        {status === 'pending' ? <button onClick={() => cancelTrip(id)}>Cancel Trip</button> : null}
       </div>
     </article>
   )

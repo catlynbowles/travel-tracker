@@ -1,7 +1,7 @@
 import TripCard from "../TripCard/TripCard"
 import './Trips.css'
 
-const Trips = ({trips, traveler, destinations}) => {
+const Trips = ({trips, traveler, destinations, cancelTrip}) => {
   const userTrips = trips.filter(trip => traveler.id === trip.userID)
   const userTripCards = userTrips.reduce((acc, trip) => {
     destinations.forEach(destination => {
@@ -14,6 +14,9 @@ const Trips = ({trips, traveler, destinations}) => {
             location={destination.destination}
             image={destination.image}
             alt={destination.alt}
+            id={trip.id}
+            key={trip.id}
+            cancelTrip={cancelTrip}
           />
         )
       }

@@ -33,18 +33,23 @@ const App = () => {
       .then(data => setTrips([...trips, data.newTrip]))
   }
 
-  const deleteTrip = (tripID) => {
+  const cancelTrip = (tripID) => {
+    console.log(tripID)
     fetch(`http://localhost:3001/api/v1/trips/${tripID}`, {
       method: 'DELETE'
     })
-      .then(data => setTrips(data))
+      .then(response => response.json())
+      .then(data => {
+        const newTrips = trips.filter(trip => trip.id !== tripID)
+        setTrips(newTrips)
+      })
   }
 
   return (
     <div className="App">
       <h1>Welcome to Travel Tracker, {traveler.name}!</h1>
         <Form addTrip={addTrip} traveler={traveler} trips={trips} destinations={destinations}/>
-        <Trips trips={trips} destinations={destinations} traveler={traveler} deleteTrip={deleteTrip}/>
+        <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
     </div>
   );
 }

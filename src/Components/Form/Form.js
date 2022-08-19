@@ -1,20 +1,18 @@
 import { useState } from 'react'
-import { Route } from 'react-router-dom'
-import Trips from '../Trips/Trips'
 import './Form.css'
-import Dropdown from '../Dropdown/Dropdown'
 
 const Form = ({traveler, addTrip, trips, destinations}) => {
   const [date, setDate] = useState('')
   const [duration, setDuration] = useState('')
   const [quantity, setQuantity] = useState(0)
+  const [location, setLocation] = useState('')
 
   const submitTrip = (e) => {
     e.preventDefault()
     const newTrip = {
       id: trips.length + 1, 
       userID: traveler.id,
-      destinationID: 1,
+      destinationID: findDestinationID(location),
       travelers: Number(quantity), 
       date: date.split('-').join('/'),
       duration: Number(duration), 
@@ -29,13 +27,35 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
     setDate('')
     setDuration('')
     setQuantity('')
+    setLocation('')
+  }
+
+  const Dropdown = () => {
+    let destinationNames = destinations.map(dest => dest.destination).sort()
+    let locationOptions = destinationNames.map(dest => {
+      return (
+        <option value={dest}>{dest}</option>
+      )
+    })
+    return (
+      <select width='15px' value={location}
+      onChange={(e) => setLocation(e.target.value)}>
+        {locationOptions.sort()}
+      </select>
+    )
+  }
+
+  const findDestinationID = (userDest) => {
+    console.log(userDest)
+    const destMatch = destinations.find(dest => dest.destination === userDest)
+    return destMatch.id
   }
 
   return (
     <section className='form'>
       <form>
         <fieldset>
-          <Dropdown destinations={destinations} trips={trips}/>
+          <Dropdown />
           <input 
             className='date'
             type='date'
