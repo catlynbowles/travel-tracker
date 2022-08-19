@@ -22,11 +22,29 @@ const App = () => {
       })
   }, [])  
 
+  const addTrip = (newTrip) => {
+    fetch('http://localhost:3001/api/v1/trips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'},
+      body: JSON.stringify(newTrip)
+    })
+      .then(response => response.json())
+      .then(data => setTrips([...trips, data.newTrip]))
+  }
+
+  const deleteTrip = (tripID) => {
+    fetch(`http://localhost:3001/api/v1/trips/${tripID}`, {
+      method: 'DELETE'
+    })
+      .then(data => setTrips(data))
+  }
+
   return (
     <div className="App">
       <h1>Welcome to Travel Tracker, {traveler.name}!</h1>
-        <Form />
-        <Trips trips={trips} destinations={destinations} traveler={traveler}/>
+        <Form addTrip={addTrip} traveler={traveler} trips={trips} destinations={destinations}/>
+        <Trips trips={trips} destinations={destinations} traveler={traveler} deleteTrip={deleteTrip}/>
     </div>
   );
 }

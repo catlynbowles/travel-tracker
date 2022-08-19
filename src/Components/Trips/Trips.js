@@ -20,7 +20,7 @@ const Trips = ({trips, traveler, destinations}) => {
     })
     return acc
   }, [])
-  console.log(userTrips)
+
   return (
     <section>
       <div className='grid'>{userTripCards}</div>
