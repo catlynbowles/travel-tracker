@@ -1,8 +1,18 @@
 .trip-card {
   background-color: white;
+  height: 275;
+  width: 280px;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border: 2px red;
   text-align: center;
   border-radius: 25px;
+}
+
+img {
+  border-radius: 25px;
+}
+
+.zoom:hover {
+  transform: scale(1.25);
 }

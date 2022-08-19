@@ -1,13 +1,13 @@
 import './TripCard.css'
 
-const TripCards = ({date, duration, status}) => {
+const TripCards = ({date, duration, status, location, image, alt}) => {
   return (
-    <article className='trip-card'>
+    <article className='trip-card zoom'>
       <div>
-        <p><b>Location: </b></p>
+        <img src={image} alt={alt} width='150' height='150'/>
+        <p><b>Location: {location}</b></p>
         <p><b>Date of Your Trip: </b> {date}</p>
-        <p><b>Duration of Your Trip: </b> {duration} days</p>
-        <p><b>Status: </b> {status}</p>
+        <p><b>Duration of Your Stay: </b> {duration} days</p>
       </div>
     </article>
   )
