@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { getData } from '../../apiCalls'
+import Form from '../Form/Form'
 
 const App = () => {
   const [traveler, setTraveler] = useState({})
@@ -22,7 +23,8 @@ const App = () => {
 
   return (
     <div className="App">
-      
+      <h1>Welcome to Travel Tracker!</h1>
+        <Form />
     </div>
   );
 }
