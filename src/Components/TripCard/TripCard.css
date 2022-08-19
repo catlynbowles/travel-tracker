@@ -1,8 +1,8 @@
 .trip-card {
   background-color: white;
-  height: 275;
+  height: 295;
   width: 280px;
-  padding: 0;
+  padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border: 2px red;
   text-align: center;
