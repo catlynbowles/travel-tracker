@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { getData } from '../../apiCalls'
 import Form from '../Form/Form'
+import Trips from '../Trips/Trips'
 
 const App = () => {
   const [traveler, setTraveler] = useState({})
@@ -23,8 +24,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Welcome to Travel Tracker!</h1>
+      <h1>Welcome to Travel Tracker, {traveler.name}!</h1>
         <Form />
+        <Trips trips={trips} destinations={destinations} traveler={traveler}/>
     </div>
   );
 }
