@@ -3,6 +3,8 @@ import './App.css';
 import { getData } from '../../apiCalls'
 import Form from '../Form/Form'
 import Trips from '../Trips/Trips'
+import Navbar from '../Navbar/Navbar'
+import { Route } from 'react-router-dom'
 
 const App = () => {
   const [traveler, setTraveler] = useState({})
@@ -17,6 +19,7 @@ const App = () => {
     Promise.all([travelerData, tripData, destinationData])
       .then(data => {
         setTraveler(data[0])
+        let userTrips = data[1].trips.filter(trip => trip.userID === data[0].id)
         setTrips(data[1].trips)
         setDestinations(data[2].destinations)
       })
@@ -49,7 +52,18 @@ const App = () => {
     <div className="App">
       <h1>Welcome to Travel Tracker, {traveler.name}!</h1>
         <Form addTrip={addTrip} traveler={traveler} trips={trips} destinations={destinations}/>
-        <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
+        <Navbar />
+        <Route exact path='/' render={() => 
+          <div>
+            <h3>All Your Trips</h3>
+            <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
+          </div>
+        }>
+        </Route>
+        <Route exact path='/:trip' render={({match}) => 
+          <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip} match={match.params}/>
+        }>
+        </Route>
     </div>
   );
 }
