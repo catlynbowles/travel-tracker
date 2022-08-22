@@ -55,16 +55,14 @@ const App = () => {
         <Navbar />
         <Route exact path='/' render={() => 
           <div>
-            <h3>ALL YOUR TRIPS</h3>
             <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
           </div>
         }/>
         <Route exact path='/:trip' render={({match}) => 
           <div>
-            <h3>YOUR {match.params.trip.toUpperCase()} TRIPS</h3>
             <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
           </div>
-        }/>
+        } />
     </div>
   );
 }

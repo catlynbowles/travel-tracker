@@ -5,15 +5,8 @@
   grid-gap: 3rem;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(280px, 1fr));
-  width: 70%;
+  width: 100%;
+  padding: 1em;
   right: 0;
-  grid-gap: 40px;
-  margin-top: 40px;
-}
-
-.grid-contents{
-  width: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  grid-gap: 1em;
 }

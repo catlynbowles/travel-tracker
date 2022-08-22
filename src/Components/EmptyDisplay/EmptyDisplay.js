@@ -4,7 +4,7 @@ const EmptyDisplay = () => {
     'display': 'flex',
     'justifyContent': 'center',
     'alignItems': 'center',
-    'width': '500'
+    'width': '100%'
   }
   return (
     <h3 style={displayStyle}>No trips match the selected criteria. Keep clickin'!</h3>

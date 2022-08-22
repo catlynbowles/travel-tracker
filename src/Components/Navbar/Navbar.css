@@ -1,3 +1,15 @@
-.active {
-  color: blue;
+.nav {
+  display: flex;
+  padding: 1em;
+}
+
+.navlinks {
+  text-decoration: none;
+  width: 80em;
+  padding: 20px;
+  text-align: center;
+}
+
+a {
+  color: black;
 }
