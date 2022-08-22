@@ -19,7 +19,7 @@ const App = () => {
     Promise.all([travelerData, tripData, destinationData])
       .then(data => {
         setTraveler(data[0])
-        let userTrips = data[1].trips.filter(trip => trip.userID === data[0].id)
+        let userTrips = data[1].trips.filter(trip => trip.userID === data[0])
         setTrips(data[1].trips)
         setDestinations(data[2].destinations)
       })
@@ -55,15 +55,16 @@ const App = () => {
         <Navbar />
         <Route exact path='/' render={() => 
           <div>
-            <h3>All Your Trips</h3>
+            <h3>ALL YOUR TRIPS</h3>
             <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
           </div>
-        }>
-        </Route>
+        }/>
         <Route exact path='/:trip' render={({match}) => 
-          <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip} match={match.params}/>
-        }>
-        </Route>
+          <div>
+            <h3>YOUR {match.params.trip.toUpperCase()} TRIPS</h3>
+            <Trips trips={trips} destinations={destinations} traveler={traveler} cancelTrip={cancelTrip}/>
+          </div>
+        }/>
     </div>
   );
 }

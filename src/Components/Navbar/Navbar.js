@@ -1,11 +1,12 @@
-import { Link, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   return (
     <nav>
-      <Link to='upcoming'><button>Upcoming Adventures</button></Link>
-      <Link to='past'><button>Past Trips</button></Link>
-      <Link to='current'><button>Current Explorations</button></Link>
+      <NavLink exact to='upcoming' activeStyle={{color: "red"}}><article>Upcoming Adventures</article></NavLink>
+      <NavLink exact to='past' activeStyle={{color: "red"}}><article>Past Trips</article></NavLink>
+      <NavLink exact to='current' activeStyle={{color: "red"}}><article>Current Explorations</article></NavLink>
+      <NavLink exact to='/' activeStyle={{color: "red"}}><article>View All My Trips</article></NavLink>
     </nav>
   )
 }
