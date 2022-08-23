@@ -4,7 +4,7 @@ import './Navbar.css'
 const Navbar = () => {
   const activeStyle = {
     'color': 'white', 
-    'backgroundColor': 'purple'
+    'backgroundColor': 'lightgray'
   }
   return (
     <nav className='nav'>

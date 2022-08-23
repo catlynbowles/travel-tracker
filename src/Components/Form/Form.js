@@ -6,13 +6,21 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
   const [duration, setDuration] = useState('')
   const [quantity, setQuantity] = useState(0)
   const [location, setLocation] = useState('')
+  const [estimate, setEstimate] = useState(0)
+
+  const estimateCost = (e) => {
+    e.preventDefault()
+    const selectedDestination = findDestination(location)
+    const totalTripCost = (selectedDestination.estimatedFlightCostPerPerson * quantity) + (selectedDestination.estimatedLodgingCostPerDay * duration)
+    setEstimate(totalTripCost)
+  }
 
   const submitTrip = (e) => {
     e.preventDefault()
     const newTrip = {
       id: trips.length + 1, 
       userID: traveler.id,
-      destinationID: findDestinationID(location),
+      destinationID: findDestination(location).id,
       travelers: Number(quantity), 
       date: date.split('-').join('/'),
       duration: Number(duration), 
@@ -28,6 +36,7 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
     setDuration('')
     setQuantity('')
     setLocation('')
+    setEstimate(0)
   }
 
   const Dropdown = () => {
@@ -45,16 +54,17 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
     )
   }
 
-  const findDestinationID = (userDest) => {
+  const findDestination = (userDest) => {
     console.log(userDest)
     const destMatch = destinations.find(dest => dest.destination === userDest)
-    return destMatch.id
+    return destMatch
   }
 
   return (
     <section className='form'>
       <form>
         <fieldset>
+          <legend className='form-label'>Book a New Trip</legend>
           <Dropdown />
           <input 
             className='date'
@@ -87,8 +97,12 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
             min='1' 
             required
           />
-          
-          <button className='rainbow-5'  onClick={(e) => submitTrip(e)}>Estimate Cost</button>
+          <button className='rainbow-5'  onClick={(e) => estimateCost(e)}>Estimate Cost</button>
+          {estimate ?
+          <div>
+            <p>${estimate.toLocaleString()}</p>
+            <button className='rainbow-5'  onClick={(e) => submitTrip(e)}>Submit Trip</button>
+          </div> : null}
         </fieldset>
       </form>
     </section>

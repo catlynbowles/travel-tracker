@@ -47,6 +47,20 @@ const Trips = ({trips, traveler, destinations, cancelTrip, match}) => {
     return renderTripsDisplay(currentTrips)
   }
 
+  const generateYearlyTotal = () => {
+    let yearlyTrips = userTrips.filter(trip => trip.date.includes('2022'))
+    let yearlyCost = yearlyTrips.reduce((acc, trip) => {
+      destinations.forEach(dest => {
+        if (trip.destinationID === dest.id) {
+          const tripCost = (dest.estimatedLodgingCostPerDay * trip.duration) + (dest.estimatedFlightCostPerPerson * trip.travelers)
+          acc += tripCost
+        }
+      })
+      return acc
+    }, 0)
+    return yearlyCost
+  }
+
   const renderTripsDisplay = (tripGenre) => {
     let displayResult; 
     tripGenre.length === 0 ? displayResult = <EmptyDisplay /> :
@@ -56,6 +70,7 @@ const Trips = ({trips, traveler, destinations, cancelTrip, match}) => {
 
   return (
     <section>
+      <p>Your travel costs this year: ${generateYearlyTotal().toLocaleString()}</p>
       <Route exact path='/' render={() => 
         <div className='grid'>{generateTripCards(userTrips)}</div>
       }/>

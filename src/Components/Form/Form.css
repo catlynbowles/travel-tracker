@@ -1,8 +1,10 @@
-form {
+.form {
   display: flex;
   justify-content: space-between;
 }
-
+form {
+  width: 100%;
+}
 fieldset {
   border: 5px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
@@ -14,6 +16,10 @@ legend {
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.form-label {
+  font-size: 2em;
 }
 
 input, button {
