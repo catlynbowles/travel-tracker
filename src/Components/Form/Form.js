@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { useState } from 'react'
 import './Form.css'
 
@@ -47,8 +48,9 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
       )
     })
     return (
-      <select width='15px' value={location}
-      onChange={(e) => setLocation(e.target.value)}>
+      <select width='15px' value={location} 
+      onChange={(e) => setLocation(e.target.value)} required='required'>
+        <option value=''>Choose destination</option>
         {locationOptions.sort()}
       </select>
     )
@@ -62,7 +64,7 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
 
   return (
     <section className='form'>
-      <form>
+      <form onSubmit={(e) => estimateCost(e)}>
         <fieldset>
           <legend className='form-label'>Book a New Trip</legend>
           <Dropdown />
@@ -73,9 +75,9 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
             value={date}
             onChange={e => setDate(e.target.value)}
             placeholder="dd/mm/yyyy"
-            min='' 
+            min={dayjs().format('YYYY-MM-DD')} 
             max='2025-01-01' 
-            required
+            required='required'
           />
 
           <input 
@@ -85,7 +87,7 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
             onChange={e => setDuration(e.target.value)}
             placeholder="Duration"
             min='1' 
-            required
+            required='required'
           />
 
           <input 
@@ -95,9 +97,9 @@ const Form = ({traveler, addTrip, trips, destinations}) => {
             onChange={e => setQuantity(e.target.value)}
             placeholder="Number of Travelers" 
             min='1' 
-            required
+            required='required'
           />
-          <button className='rainbow-5'  onClick={(e) => estimateCost(e)}>Estimate Cost</button>
+          <button className='rainbow-5' type='submit' >Estimate Cost</button>
           {estimate ?
           <div>
             <p>${estimate.toLocaleString()}</p>
